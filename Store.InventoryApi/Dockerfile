@@ -7,16 +7,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Store.ProductApi.csproj", "Store.ProductApi/"]
-RUN dotnet restore "Store.ProductApi/Store.ProductApi.csproj"
+COPY ["Store.Inventory/Store.InventoryApi.csproj", "Store.InventoryApi/"]
+RUN dotnet restore "Store.InventoryApi/Store.InventoryApi.csproj"
 COPY . .
-WORKDIR "/src/Store.ProductApi"
-RUN dotnet build "Store.ProductApi.csproj" -c Release -o /app/build
+WORKDIR "/src/Store.InventoryApi"
+RUN dotnet build "Store.InventoryApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Store.ProductApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Store.InventoryApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Store.ProductApi.dll"]
+ENTRYPOINT ["dotnet", "Store.InventoryApi.dll"]
