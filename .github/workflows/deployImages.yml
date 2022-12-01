@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: '/src/Store.InventoryApi'
+        working-directory: '/Store.InventoryApi'
     steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
@@ -31,7 +31,7 @@ jobs:
     needs: [build-inventory-project]
     defaults:
       run:
-        working-directory: '/src/Store.InventoryApi'
+        working-directory: '/Store.InventoryApi'
     steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: '/src/Store.ProductApi'
+        working-directory: '/Store.ProductApi'
     steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
@@ -68,7 +68,7 @@ jobs:
     needs: [build-product-project]
     defaults:
       run:
-        working-directory: './src/Store.ProductApi'
+        working-directory: './Store.ProductApi'
     steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
@@ -88,7 +88,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: './src/Store'
+        working-directory: './Store'
     steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
@@ -105,7 +105,7 @@ jobs:
     needs: [build-store-project]
     defaults:
       run:
-        working-directory: './src/Store'
+        working-directory: './Store'
     steps:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
