@@ -14,13 +14,13 @@ var baseURL = (Environment.GetEnvironmentVariable("BASE_URL") ?? "http://localho
 builder.Services.AddHttpClient("Products", (httpClient) =>
 {
     httpClient.BaseAddress = new Uri(baseURL);
-    httpClient.DefaultRequestHeaders.Add("dapr-app-id", "Products");
+    httpClient.DefaultRequestHeaders.Add("dapr-app-id", "products");
 });
 
 builder.Services.AddHttpClient("Inventory", (httpClient) =>
 {
     httpClient.BaseAddress = new Uri(baseURL);
-    httpClient.DefaultRequestHeaders.Add("dapr-app-id", "Inventory");
+    httpClient.DefaultRequestHeaders.Add("dapr-app-id", "inventory");
 });
 
 var app = builder.Build();
