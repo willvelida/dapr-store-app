@@ -1,7 +1,4 @@
 name: Deploy Images to GHCR
-
-env:
-  DOTNET_VERSION: '6.0.x'
   
 on:
   push:
@@ -10,25 +7,8 @@ on:
   workflow_dispatch:
   
 jobs:
-  build-inventory-project:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: './Store.InventoryApi'
-    steps:
-      - name: 'Checkout GitHub Action'
-        uses: actions/checkout@main
-      - name: 'Setup dotnet'
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-      - name: 'Install Dependencies'
-        run: dotnet restore
-      - name: 'Build project'
-        run: dotnet build --no-restore
   push-inventory-image:
     runs-on: ubuntu-latest
-    needs: [build-inventory-project]
     defaults:
       run:
         working-directory: './Store.InventoryApi'
@@ -48,25 +28,8 @@ jobs:
           docker build . --tag ghcr.io/willvelida/inventory:latest
           docker push ghcr.io/willvelida/inventory:latest
           
-  build-product-project:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: './Store.ProductApi'
-    steps:
-      - name: 'Checkout GitHub Action'
-        uses: actions/checkout@main
-      - name: 'Setup dotnet'
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-      - name: 'Install Dependencies'
-        run: dotnet restore
-      - name: 'Build project'
-        run: dotnet build --no-restore
   push-product-image:
     runs-on: ubuntu-latest
-    needs: [build-product-project]
     defaults:
       run:
         working-directory: './Store.ProductApi'
@@ -86,25 +49,8 @@ jobs:
           docker build . --tag ghcr.io/willvelida/product:latest
           docker push ghcr.io/willvelida/product:latest
           
-  build-store-project:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: './Store'
-    steps:
-      - name: 'Checkout GitHub Action'
-        uses: actions/checkout@main
-      - name: 'Setup dotnet'
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-      - name: 'Install Dependencies'
-        run: dotnet restore
-      - name: 'Build project'
-        run: dotnet build --no-restore
   push-store-image:
     runs-on: ubuntu-latest
-    needs: [build-store-project]
     defaults:
       run:
         working-directory: './Store'
